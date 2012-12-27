@@ -10,6 +10,9 @@
 				"background-color" : "#EEE",
 				"border-radius"    : "5px",
 				"padding"          : "10px"
+			},
+			img : {
+				dir : '' // 图片默认在网站根路径
 			}
 		}, options);
 
@@ -33,10 +36,10 @@
 			})
 
 			// 加入切换图片按钮
-			appendToggleBtn($div, $imgs)
+			appendToggleBtn($div, $imgs, settings.img.dir)
 
 			// 加入圆形按钮
-			appendSelectBtn($div, imgsLength, $imgs)
+			appendSelectBtn($div, imgsLength, $imgs, settings.img.dir)
 
 			// 加入插件样式
 			pluginCSS($div, settings)
@@ -98,17 +101,18 @@
 	/**
 	 * 添加切换图片的（左右）按钮
 	 */
-	function appendToggleBtn($div, $imgs) {
-		var btnClass = namespace + "-btn",
+	function appendToggleBtn($div, $imgs, imgPath) {
+		var btnClass   = namespace + "-btn",
 				$btn,
-				imgsLength = $imgs.length
+				imgsLength = $imgs.length,
+				imgPath   += "/eb-slideshow-btn.png"
 
 		$div.append('<div class="' + btnClass + '">\
 									<div>\
-										<a href="#" class="' + namespace + '-left"><span style="background-image: url(/btn.png); background-position: 0 0; display: block; width: 21px; height: 34px;"></span><!-- <i class="icon-chevron-left"></i> --></a>\
+										<a href="#" class="' + namespace + '-left"><span style="background-image: url(' + imgPath + '); background-position: 0 0; display: block; width: 21px; height: 34px;"></span><!-- <i class="icon-chevron-left"></i> --></a>\
 									</div>\
 									<div>\
-										<a href="#" class="' + namespace + '-right"><span style="background-image: url(/btn.png); background-position: -63px 0; display: block; width: 21px; height: 34px;"></span></a>\
+										<a href="#" class="' + namespace + '-right"><span style="background-image: url(' + imgPath + '); background-position: -63px 0; display: block; width: 21px; height: 34px;"></span></a>\
 									</div>\
 								</div>')
 
@@ -160,9 +164,10 @@
 	/**
 	 * 添加圆形按钮
 	 */
-	function appendSelectBtn($div, imgCount, $imgs) {
-		var $ul = $("<ul></ul>"),
-				li = ""
+	function appendSelectBtn($div, imgCount, $imgs, imgPath) {
+		var $ul      = $("<ul></ul>"),
+				li       = "",
+				imgPath += "/eb-slideshow-btn.png"
 
 		imgCount = imgCount || 1
 		for (var i = 0; i < imgCount; i += 1) {
@@ -179,7 +184,7 @@
 			"display"             : "inline-block",
 			"width"               : "21px",
 			"height"              : "21px",
-			"background-image"    : "url(/btn.png)"
+			"background-image"    : "url(" + imgPath + ")"
 		})
 		highlightBtn.call($div, 0)
 
