@@ -105,7 +105,7 @@
 		var btnClass   = namespace + "-btn",
 				$btn,
 				imgsLength = $imgs.length,
-				imgPath   += "/eb-slideshow-btn.png"
+				imgPath    = imgPath + "/eb-slideshow-btn.png"
 
 		$div.append('<div class="' + btnClass + '">\
 									<div>\
@@ -167,7 +167,7 @@
 	function appendSelectBtn($div, imgCount, $imgs, imgPath) {
 		var $ul      = $("<ul></ul>"),
 				li       = "",
-				imgPath += "/eb-slideshow-btn.png"
+				imgPath  = imgPath + "/eb-slideshow-btn.png"
 
 		imgCount = imgCount || 1
 		for (var i = 0; i < imgCount; i += 1) {
