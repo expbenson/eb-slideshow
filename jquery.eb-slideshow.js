@@ -348,9 +348,9 @@
 			}
 		})
 		slideshow.addEventListener("touchend", function (event) {
-			if (endX < startX && Math.abs(endX - startX) > 50) {
+			if (endX < startX && Math.abs(endX - startX) > 30) {
 				$(".eb-slideshow-right").trigger("click")
-			} else if (endX > startX && Math.abs(endX - startX) > 50) {
+			} else if (endX > startX && Math.abs(endX - startX) > 30) {
 				$(".eb-slideshow-left").trigger("click")
 			}
 		})
