@@ -67,6 +67,8 @@
 					}, 200)
 				})(winResizeEvent, this, event, $div, $imgs)
 			})
+
+			touchSwipe($div[0])
 		})
 	}
 
@@ -308,6 +310,50 @@
 		})
 
 		this.data("currentImgIndex", highlightIndex)
+	}
+
+	/**
+	 * 左右滑动事件
+	 */
+	function touchSwipe(slideshow) {
+		var startX = 0,
+			startY = 0,
+			endX = 0,
+			endY = 0
+
+		if (typeof slideshow !== "object") return
+
+		slideshow.addEventListener("touchstart", function (event) {
+			if (event.touches && event.touches.length) {
+				var touch = event.touches[0]
+				startX = touch.pageX
+				startY = touch.pageY
+				endX = startX
+				endY = startY
+			}
+		})
+		slideshow.addEventListener("touchmove", function (event) {
+			if (event.touches && event.touches.length) {
+				var touch = event.touches[0]
+				endX = touch.pageX
+				endY = touch.pageY
+
+				if (startX != endX && startY != endY) {
+					var tan = Math.abs((endY - startY) / (endX - startX)),
+					tan30 = Math.tan(Math.PI / 6)
+					if (tan30 > tan) {
+						event.preventDefault()
+					}
+				}
+			}
+		})
+		slideshow.addEventListener("touchend", function (event) {
+			if (endX < startX && Math.abs(endX - startX) > 50) {
+				$(".eb-slideshow-right").trigger("click")
+			} else if (endX > startX && Math.abs(endX - startX) > 50) {
+				$(".eb-slideshow-left").trigger("click")
+			}
+		})
 	}
 
 	/**
